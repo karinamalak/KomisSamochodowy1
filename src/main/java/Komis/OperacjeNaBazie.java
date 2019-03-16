@@ -4,6 +4,7 @@ package Komis;
 import com.sun.org.apache.bcel.internal.generic.SWITCH;
 
 import java.io.*;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class OperacjeNaBazie {
@@ -15,6 +16,7 @@ public class OperacjeNaBazie {
     public static String linia = "";
     public static ArrayList<String> lista = new ArrayList<>();
     public static String[][] daneOdczytane;
+    public static int nrLinii = 0;
 
     public static void odczyt() {
 
@@ -26,7 +28,7 @@ public class OperacjeNaBazie {
         }
         BufferedReader bfr = new BufferedReader(fr);
 
-        int nrLinii = 0;
+
 
         //ZCZYTYWANIE KOLEJNYCH LINIJEK Z PLIKU TXT
         try {
@@ -65,25 +67,17 @@ public class OperacjeNaBazie {
 
     }
 
-    public static void wyswietlanie() {
-        for (int i = 0; i < daneOdczytane.length; i++) {
-            for (int j = 0; j < daneOdczytane[i].length; j++) {
-                switch(j) {
-                    case 1:
-                        System.out.println("Marka: "+daneOdczytane[i][j]);
-                    case 2:
-                        System.out.println("Rocznik: "+daneOdczytane[i][j]);
-                    case 3:
-                        System.out.println("Przebieg: "+daneOdczytane[i][j]);
-                    case 4:
-                        System.out.println("Kolor: "+daneOdczytane[i][j]);
-                    case 5:
-                        System.out.println("Liczba drzwi: "+daneOdczytane[i][j]);
-                    case 6:
-                        System.out.println("Cena: "+daneOdczytane[i][j]);
-                }
-            }
-        }
+    public static String[][] getDaneOdczytane() {
+        return daneOdczytane;
+    }
+
+    public static void setDaneOdczytane(String[][] daneOdczytane) {
+        OperacjeNaBazie.daneOdczytane = daneOdczytane;
+    }
+    public static void dodawanie(int id, String marka, int rocznik, long przebieg, String kolor, int iloscDrzwi, BigDecimal cena){
+
+        //tu bedzie sie odnosci do OperacjeNaBazie
 
     }
+
 }

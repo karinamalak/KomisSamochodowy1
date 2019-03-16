@@ -4,13 +4,26 @@ import java.math.BigDecimal;
 
 public class Samochod {
 
-    String kolor;//5
-    BigDecimal cena;//7
-    int iloscDrzwi;//6
-    String marka; //2
-    long przebieg; //4
-    int rocznik; //3
-    int id; //1
+    private String kolor;//5
+    private BigDecimal cena;//7
+    private int iloscDrzwi;//6
+    private String marka; //2
+    private long przebieg; //4
+    private int rocznik; //3
+    private int id; //1
+
+    public Samochod( int id, String marka, int rocznik, long przebieg, String kolor, int iloscDrzwi, BigDecimal cena) {
+        this.kolor = kolor;
+        this.cena = cena;
+        this.iloscDrzwi = iloscDrzwi;
+        this.marka = marka;
+        this.przebieg = przebieg;
+        this.rocznik = rocznik;
+        this.id = id;
+    }
+
+    public Samochod() {
+    }
 
     public int getId() {
         return id;
@@ -67,4 +80,8 @@ public class Samochod {
     public void setRocznik(int rocznik) {
         this.rocznik = rocznik;
     }
+
+
+
+
 }
