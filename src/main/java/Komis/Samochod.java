@@ -2,7 +2,7 @@ package Komis;
 
 import java.math.BigDecimal;
 
-public class Samochod {
+public class Samochod implements Comparable<Samochod>{
 
     private String kolor;//5
     private BigDecimal cena;//7
@@ -12,26 +12,19 @@ public class Samochod {
     private int rocznik; //3
     private int id; //1
 
-    public Samochod( int id, String marka, int rocznik, long przebieg, String kolor, int iloscDrzwi, BigDecimal cena) {
+    public Samochod( String marka, int rocznik, long przebieg, String kolor, int iloscDrzwi, BigDecimal cena) {
         this.kolor = kolor;
         this.cena = cena;
         this.iloscDrzwi = iloscDrzwi;
         this.marka = marka;
         this.przebieg = przebieg;
         this.rocznik = rocznik;
-        this.id = id;
+
     }
 
     public Samochod() {
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getKolor() {
         return kolor;
@@ -82,6 +75,21 @@ public class Samochod {
     }
 
 
+    @Override
+    public String toString() {
+        return "Samochod " +
+                "kolor: '" + kolor + '\'' +
+                ", cena: " + cena +
+                ", iloscDrzwi: " + iloscDrzwi +
+                ", marka: '" + marka + '\'' +
+                ", przebieg: " + przebieg +
+                ", rocznik: " + rocznik +
+                //", id: " + id +
+                '}'+'\n';
+    }
 
-
+    @Override
+    public int compareTo(Samochod o) {
+        return 0;
+    }
 }

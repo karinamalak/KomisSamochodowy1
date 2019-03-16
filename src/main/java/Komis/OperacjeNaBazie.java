@@ -14,6 +14,7 @@ public class OperacjeNaBazie {
     public static BufferedWriter bufferedWriter = null;
     public static FileReader fr = null;
     public static String linia = "";
+    public static String linia2 = "";
     public static ArrayList<String> lista = new ArrayList<>();
     public static String[][] daneOdczytane;
     public static int nrLinii = 0;
@@ -27,7 +28,6 @@ public class OperacjeNaBazie {
             System.exit(1);
         }
         BufferedReader bfr = new BufferedReader(fr);
-
 
 
         //ZCZYTYWANIE KOLEJNYCH LINIJEK Z PLIKU TXT
@@ -74,9 +74,36 @@ public class OperacjeNaBazie {
     public static void setDaneOdczytane(String[][] daneOdczytane) {
         OperacjeNaBazie.daneOdczytane = daneOdczytane;
     }
-    public static void dodawanie(int id, String marka, int rocznik, long przebieg, String kolor, int iloscDrzwi, BigDecimal cena){
 
-        //tu bedzie sie odnosci do OperacjeNaBazie
+
+    public static void dodawanie(Samochod samochod){
+        linia = "";
+        try {
+            fileWriter = new FileWriter(PATH);
+        } catch (IOException e) {
+            System.out.println("BŁĄD PRZY OTWIERANIU PLIKU!");
+            System.exit(1);
+        }
+        bufferedWriter = new BufferedWriter(fileWriter);
+        for (int i = 0; i < daneOdczytane.length; i++) {
+            for (int j = 0; j < daneOdczytane[i].length; j++) {
+                linia2 += daneOdczytane[i][j] + ";";
+            }
+            try {
+                bufferedWriter.write(linia2);
+                bufferedWriter.newLine();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            linia2="";
+        }
+        try {
+            bufferedWriter.close();
+        } catch (IOException e) {
+            System.out.println("BŁĄD PRZY ZAMYKANIU PLIKU!");
+            System.exit(3);
+        }
+
 
     }
 
