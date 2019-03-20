@@ -1,17 +1,16 @@
 package Komis;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class FunkcjeAplikacji {
+    private static final Scanner scanner = new Scanner(System.in);
 
-    //wyswietlanie
 
-   // public static String[][] daneOdczytane ;
+    // public static String[][] daneOdczytane ;
     public static ArrayList<Samochod> lista = new ArrayList<>();
+    private static BigDecimal suma = new BigDecimal(0);
     //=
 //rozmiar tablicy
     //tablica pusta be rozmiaru
@@ -59,56 +58,124 @@ public class FunkcjeAplikacji {
 //        }
 
 
-  //  }
+    //  }
 
     public static List<Samochod> pobieranieSamochodow() {
-            return lista;
+        return lista;
+    }
+
+    public static int pobieranieId() {
+        int max = 0;
+        for (Samochod l : lista
+        ) {
+            if (l.getId() > max) max = l.getId();
+        }
+        return max;
     }
 
 
-    public static void dodawanie(Samochod samochod){
+    public static void dodawanie(Samochod samochod) {
         lista.add(samochod);
     }
 
-    public static List<Samochod> sortowanieTyp(List<Samochod> samochod, int wybor){
 
-
-        switch(wybor) {
+    public static void sortowanie( List<Samochod> lista,int wybor) {
+        switch (wybor) {
             case 1:
-                samochod.stream().sorted((o1, o2) -> o1.getMarka().compareTo(o2.getMarka()));
+                lista.stream().sorted((o1, o2) -> o1.getMarka().compareTo(o2.getMarka())).forEach(System.out::println);
+
                 break;
             case 2:
-                samochod.stream().sorted((o1, o2) -> o1.getCena().compareTo(o2.getCena()));
+                lista.stream().sorted((o1, o2) -> o1.getCena().compareTo(o2.getCena())).forEach(System.out::println);
                 break;
             case 3:
-                samochod.stream().sorted((o1, o2) -> o1.getKolor().compareTo(o2.getKolor()));
+                lista.stream().sorted((o1, o2) -> o1.getKolor().compareTo(o2.getKolor())).forEach(System.out::println);
                 break;
             case 4:
-                samochod.stream().sorted((o1, o2) -> o1.getIloscDrzwi()-o2.getIloscDrzwi());
+                lista.stream().sorted((o1, o2) -> o1.getIloscDrzwi() - o2.getIloscDrzwi()).forEach(System.out::println);
                 break;
             case 5:
-                samochod.stream().sorted((o1, o2) -> o1.getRocznik()-o2.getRocznik());
+                lista.stream().sorted((o1, o2) -> o1.getRocznik() - o2.getRocznik()).forEach(System.out::println);
                 break;
-           // case 6:
-            //    samochod.stream().sorted((o1, o2) -> o1.getPrzebieg()-o2.getPrzebieg());
-            //    break;
+//             case 6:
+//                samochod.stream().sorted((o1, o2) -> o1.getPrzebieg()-o2.getPrzebieg()).forEach(System.out::println);
+//                break;
 
         }
-
-
-
-        return samochod;
     }
 
-    public static void sortowanie(){
+    public static List<Samochod> filtrowanie( List<Integer> filtr) {
+        List<Samochod> listaFiltrowana = lista;
+        for (Integer f : filtr
+        ) {
+            switch (f) {
+                case 1:
+                    System.out.println("Podaj jaką markę chcesz wyfiltrować: ");
+                    String marka = scanner.nextLine();
+                    listaFiltrowana = listaFiltrowana.stream()
+                            .filter(samochod1 -> samochod1.getMarka().equals(marka))
+                            .collect(Collectors.toList());
+                    break;
+                case 2:
+                    System.out.println("Podaj jaką cene chcesz wyfiltrować: ");
 
+                    listaFiltrowana = listaFiltrowana.stream()
+                            .filter(samochod1 -> (samochod1.getCena().equals(scanner.nextBigDecimal())))
+                            .collect(Collectors.toList());
+                    break;
+                case 3:
+                    System.out.println("Podaj jaki kolor chcesz wyfiltrować: ");
+
+                    listaFiltrowana = listaFiltrowana.stream()
+                            .filter(samochod1 -> samochod1.getKolor().equals(scanner.nextLine()))
+                            .collect(Collectors.toList());
+                    break;
+                case 4:
+                    System.out.println("Podaj ile drzwi chcesz wyfiltrować: ");
+                    listaFiltrowana = listaFiltrowana.stream()
+                            .filter(samochod1 -> samochod1.getIloscDrzwi() == scanner.nextInt())
+                            .collect(Collectors.toList());
+                    break;
+                case 5:
+                    System.out.println("Podaj jaki rocznik chcesz wyfiltrować: ");
+
+                    listaFiltrowana = listaFiltrowana.stream()
+                            .filter(samochod1 -> samochod1.getRocznik() == scanner.nextInt())
+                            .collect(Collectors.toList());
+                    break;
+                case 6:
+                    System.out.println("Podaj jaki liczik chcesz wyfiltrować: ");
+                    listaFiltrowana = listaFiltrowana.stream()
+                            .filter(samochod1 -> samochod1.getPrzebieg() == scanner.nextLong())
+                            .collect(Collectors.toList());
+                    break;
+
+            }
+        }
+        return listaFiltrowana;
     }
 
-    public static void filtrowaie(Samochod samochod){
-
+    public static void FiltrSort( List<Integer> filtr,int wybor) {
+        sortowanie(filtrowanie(filtr),wybor);//wywolanie filtrowanie
+        //sortowanie();
+        //wywolanie sortowania
     }
 
+    public static void usuwanie(int id) {
 
+        for (Samochod l : lista
+        ) {
+            if (l.getId() == id) {
+                suma = suma.add(l.getCena());//najpierw suma auta
+                lista.remove(l);
+                break;
+            }
+        }
+    }
+
+    public static BigDecimal sumaSprzedanych() {
+        return suma;
+    }
 
 
 }

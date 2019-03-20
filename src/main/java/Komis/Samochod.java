@@ -1,8 +1,10 @@
 package Komis;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Comparator;
 
-public class Samochod implements Comparable<Samochod>{
+public class Samochod implements Comparator<Samochod>, Serializable {
 
     private String kolor;//5
     private BigDecimal cena;//7
@@ -12,14 +14,14 @@ public class Samochod implements Comparable<Samochod>{
     private int rocznik; //3
     private int id; //1
 
-    public Samochod( String marka, int rocznik, long przebieg, String kolor, int iloscDrzwi, BigDecimal cena) {
+    public Samochod(int id, String marka, int rocznik, long przebieg, String kolor, int iloscDrzwi, BigDecimal cena) {
         this.kolor = kolor;
         this.cena = cena;
         this.iloscDrzwi = iloscDrzwi;
         this.marka = marka;
         this.przebieg = przebieg;
         this.rocznik = rocznik;
-
+        this.id = id;
     }
 
     public Samochod() {
@@ -74,22 +76,40 @@ public class Samochod implements Comparable<Samochod>{
         this.rocznik = rocznik;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     @Override
     public String toString() {
         return "Samochod " +
-                "kolor: '" + kolor + '\'' +
+                "kolor: " + kolor +
                 ", cena: " + cena +
                 ", iloscDrzwi: " + iloscDrzwi +
-                ", marka: '" + marka + '\'' +
+                ", marka: " + marka +
                 ", przebieg: " + przebieg +
                 ", rocznik: " + rocznik +
-                //", id: " + id +
-                '}'+'\n';
+                ", id: " + id +
+                '}' + '\n';
+    }
+
+//    @Override
+//    public static int compareTo(Samochod o) {
+//        return 0;
+//    }
+
+    @Override
+    public int compare(Samochod o1, Samochod o2) {
+        return 0;
     }
 
     @Override
-    public int compareTo(Samochod o) {
-        return 0;
+    public Comparator<Samochod> reversed() {
+        return null;
     }
+
 }
